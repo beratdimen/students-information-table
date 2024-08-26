@@ -32,6 +32,7 @@ const records = [
   },
 ];
 
+localStorage.data = JSON.stringify(records);
 
 function NewStudent({ isOpen, setIsOpen, data, setData }) {
   const [ad, setAd] = useState();
