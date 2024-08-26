@@ -34,7 +34,7 @@ const records = [
 
 localStorage.data = JSON.stringify(records);
 
-function NewStudent({ isOpen, setIsOpen, data, setData }) {
+function NewStudent({ isOpen, setIsOpen, data, setData, save }) {
   const [ad, setAd] = useState();
   const [soyad, setSoyad] = useState();
   const [ePosta, setEPosta] = useState();
@@ -162,6 +162,7 @@ function App() {
         data={data}
         setData={setData}
         setIsOpen={setIsOpen}
+        save={save}
       />
     </div>
   );
