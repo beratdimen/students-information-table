@@ -51,6 +51,7 @@ function NewStudent({ isOpen, setIsOpen, data, setData }) {
     };
 
     setData([...data, student]);
+    save();
 
     setIsOpen(false);
   }
