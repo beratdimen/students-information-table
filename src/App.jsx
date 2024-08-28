@@ -72,24 +72,31 @@ function NewStudent({ isOpen, setIsOpen, data, setData, save }) {
               placeholder="Ad"
               value={ad}
               onChange={(e) => setAd(e.target.value)}
+              required
             />
             <input
               type="text"
               placeholder="Soyad"
               value={soyad}
               onChange={(e) => setSoyad(e.target.value)}
+              required
+
             />
             <input
               type="text"
               placeholder="E-Posta"
               value={ePosta}
               onChange={(e) => setEPosta(e.target.value)}
+              required
+
             />
             <input
               type="date"
               placeholder="Doğum Tarihi"
               value={dogumTarihi}
               onChange={(e) => setDogumTarihi(e.target.value)}
+              required
+
             />
 
             <button type="submit">Gönder</button>
