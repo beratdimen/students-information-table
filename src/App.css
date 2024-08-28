@@ -96,6 +96,8 @@ h1 {
 }
 
 dialog {
+  position: absolute;
+  top: 50px;
   .dialogContainer {
     display: flex;
     flex-direction: column;

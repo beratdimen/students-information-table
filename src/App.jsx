@@ -32,8 +32,6 @@ const records = [
   },
 ];
 
-localStorage.data = JSON.stringify(records);
-
 function NewStudent({ isOpen, setIsOpen, data, setData, save }) {
   const [ad, setAd] = useState();
   const [soyad, setSoyad] = useState();
@@ -42,6 +40,9 @@ function NewStudent({ isOpen, setIsOpen, data, setData, save }) {
 
   function addNewStudent(e) {
     e.preventDefault();
+    // const formData = new FormData(e.target);
+    // const formObj = Object.fromEntries(formData);
+    // formObj.id = data.length ? data[data.length - 1].id + 1 : 1;
     const student = {
       id: data.length + 1,
       ad: ad,
@@ -51,9 +52,14 @@ function NewStudent({ isOpen, setIsOpen, data, setData, save }) {
     };
 
     setData([...data, student]);
-    save();
 
     setIsOpen(false);
+    save();
+
+    setAd("");
+    setSoyad("");
+    setEPosta("");
+    setDogumTarihi("");
   }
 
   return (
@@ -100,14 +106,20 @@ function NewStudent({ isOpen, setIsOpen, data, setData, save }) {
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [data, setData] = useState(records);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (localStorage.data) {
-      localStorage.data = JSON.stringify(records);
-    }
-    setData(JSON.parse(localStorage.data));
+    // if (localStorage.data) {
+    //   localStorage.data = JSON.stringify(records);
+    // }
+    localStorage.data ? setData(JSON.parse(localStorage.data)) : setData([]);
   }, []);
+
+  useEffect(() => {
+    if (data.length) {
+      save();
+    }
+  }, [data]);
 
   function save() {
     localStorage.data = JSON.stringify(data);
@@ -186,6 +198,7 @@ function StudentRow({
     formObj.id = id;
     updateRecord(formObj);
     setEditing(false);
+    save();
   }
 
   return (
@@ -246,9 +259,7 @@ function StudentRow({
           <div className="studentTableCol">{ad}</div>
           <div className="studentTableCol">{soyad}</div>
           <div className="studentTableCol">{ePosta}</div>
-          <div className="studentTableCol">
-            {dogumTarihi.split("-").reverse().join(".")}
-          </div>
+          <div className="studentTableCol">{dogumTarihi}</div>
           <div className="studentTableCol">
             <button type="button" onClick={() => setEditing(true)}>
               Düzenle
